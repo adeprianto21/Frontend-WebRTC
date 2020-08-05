@@ -44,7 +44,7 @@ const Register = () => {
     <Container className='mt-5'>
       <Card style={{ width: '50%', margin: 'auto' }}>
         <Card.Body>
-          <Card.Title className='text-center'>User Register</Card.Title>
+          <Card.Title className='text-center'>Admin Register</Card.Title>
           <Card.Subtitle className='mb-2 text-muted text-center'>
             Apo-Tech
           </Card.Subtitle>

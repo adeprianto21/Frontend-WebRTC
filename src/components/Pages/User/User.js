@@ -14,12 +14,12 @@ const User = () => {
   useEffect(() => {
     if (role === 'Admin') {
       history.replace('/admin/dashboard');
-    } else if (!role) {
+    } else if (!role && /user\/dashboard/.test(history.location.pathname)) {
       history.replace('/user/login');
     } else if (history.location.pathname === '/user' && role === 'User') {
       history.replace('/user/dashboard');
     }
-  });
+  }, [history, role]);
 
   return (
     <Switch>

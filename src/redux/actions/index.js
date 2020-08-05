@@ -4,4 +4,5 @@ export {
   authAdmin,
   registerAdmin,
   clearError,
+  authLogout,
 } from './auth';

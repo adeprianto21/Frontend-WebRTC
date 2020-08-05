@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import HomePage from './components/Pages/Home/Home';
@@ -8,9 +9,11 @@ import User from './components/Pages/User/User';
 import Admin from './components/Pages/Admin/Admin';
 
 function App() {
+  const location = useLocation();
+
   return (
     <div>
-      <Header />
+      {!/dashboard/.test(location.pathname) && <Header />}
       <Switch>
         <Route path='/admin'>
           <Admin />

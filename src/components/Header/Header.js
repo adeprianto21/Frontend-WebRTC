@@ -31,9 +31,6 @@ const Header = () => {
           <Nav.Link as={Link} to='/admin/dashboard'>
             Dashboard
           </Nav.Link>
-          <Nav.Link as={Link} to='/admin/dashboard' className='ml-auto'>
-            Dashboard
-          </Nav.Link>
         </>
       );
     } else {
@@ -48,7 +45,7 @@ const Header = () => {
   return (
     <Navbar bg='primary' expand='lg' variant='dark'>
       <Container>
-        <Navbar.Brand as={Link} to='/'>
+        <Navbar.Brand as={Link} to='/' className='font-weight-bold'>
           Apo-Tech
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />

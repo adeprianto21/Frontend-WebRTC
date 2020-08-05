@@ -1,11 +1,16 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
+
+import style from './Dashboard.module.css';
+
+import Sidebar from './Sidebar/Sidebar';
+import Header from './Header/Header';
 
 const Dashboard = () => {
   return (
-    <Container className='mt-5'>
-      <div>Dashboard Admin</div>
-    </Container>
+    <div className={style.dashboard}>
+      <Header />
+      <Sidebar />
+    </div>
   );
 };
 

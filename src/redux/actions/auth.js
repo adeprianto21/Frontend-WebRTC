@@ -35,6 +35,12 @@ export const clearError = () => {
   };
 };
 
+export const authLogout = () => {
+  return {
+    type: actionTypes.AUTH_LOGOUT,
+  };
+};
+
 export const registerUser = (name, username, email, password) => {
   return (dispatch) => {
     dispatch(authStart());

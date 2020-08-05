@@ -6,6 +6,8 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import './index.css';
+
 import { store } from './redux/store';
 import { persistor } from './redux/store';
 
