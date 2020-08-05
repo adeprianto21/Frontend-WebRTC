@@ -28,7 +28,7 @@ const Register = () => {
 
   const submitHandler = (values) => {
     dispatch(
-      actions.register(
+      actions.registerUser(
         values.name,
         values.username,
         values.email,

@@ -1,7 +1,10 @@
 import React from 'react';
-import { Container, Card, Form, Button } from 'react-bootstrap';
+import { Container, Card, Form, Button, Spinner, Alert } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useSelector, useDispatch } from 'react-redux';
+
+import * as actions from '../../../../redux/actions';
 
 const initialValues = {
   name: '',
@@ -17,20 +20,44 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required(),
 });
 
-const submitHandler = (values) => {
-  console.log(values);
-};
-
 const Register = () => {
+  const dispatch = useDispatch();
+
+  const error = useSelector((state) => state.auth.error);
+  const loading = useSelector((state) => state.auth.loading);
+
+  const submitHandler = (values) => {
+    dispatch(
+      actions.registerAdmin(
+        values.name,
+        values.username,
+        values.email,
+        values.password
+      )
+    );
+  };
+
   return (
     <Container className='mt-5'>
       <Card style={{ width: '50%', margin: 'auto' }}>
         <Card.Body>
-          <Card.Title className='text-center'>Admin Register</Card.Title>
+          <Card.Title className='text-center'>User Register</Card.Title>
           <Card.Subtitle className='mb-2 text-muted text-center'>
             Apo-Tech
           </Card.Subtitle>
           <div className='mt-5'>
+            {error && (
+              <Alert
+                variant='danger'
+                onClose={() => {
+                  dispatch(actions.clearError());
+                }}
+                dismissible
+                className='mb-4'
+              >
+                <p className='text-center font-weight-bold'>{error}</p>
+              </Alert>
+            )}
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -109,9 +136,13 @@ const Register = () => {
                     </Form.Group>
 
                     <div className='text-center'>
-                      <Button variant='primary' type='submit' className='mt-3'>
-                        Submit
-                      </Button>
+                      {loading ? (
+                        <Spinner animation='border' variant='primary' />
+                      ) : (
+                        <Button variant='primary' type='submit'>
+                          Register
+                        </Button>
+                      )}
                     </div>
                   </Form>
                 );

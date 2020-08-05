@@ -23,7 +23,7 @@ const Login = () => {
   const loading = useSelector((state) => state.auth.loading);
 
   const submitHandler = (values) => {
-    dispatch(actions.auth(values.identifier, values.password));
+    dispatch(actions.authUser(values.identifier, values.password));
   };
 
   return (
