@@ -1,7 +1,10 @@
 import React from 'react';
-import { Container, Card, Form, Button } from 'react-bootstrap';
+import { Container, Card, Form, Button, Spinner, Alert } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useSelector, useDispatch } from 'react-redux';
+
+import * as actions from '../../../../redux/actions';
 
 const initialValues = {
   identifier: '',
@@ -13,11 +16,16 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required(),
 });
 
-const submitHandler = (values) => {
-  console.log(values);
-};
-
 const Login = () => {
+  const dispatch = useDispatch();
+
+  const error = useSelector((state) => state.auth.error);
+  const loading = useSelector((state) => state.auth.loading);
+
+  const submitHandler = (values) => {
+    dispatch(actions.auth(values.identifier, values.password));
+  };
+
   return (
     <Container className='mt-5'>
       <Card style={{ width: '50%', margin: 'auto' }}>
@@ -27,6 +35,18 @@ const Login = () => {
             Apo-Tech
           </Card.Subtitle>
           <div className='mt-5'>
+            {error && (
+              <Alert
+                variant='danger'
+                onClose={() => {
+                  dispatch(actions.clearError());
+                }}
+                dismissible
+                className='mb-4'
+              >
+                <p className='text-center font-weight-bold'>{error}</p>
+              </Alert>
+            )}
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -72,10 +92,14 @@ const Login = () => {
                       </Form.Control.Feedback>
                     </Form.Group>
 
-                    <div className='text-center'>
-                      <Button variant='primary' type='submit' className='mt-3'>
-                        Submit
-                      </Button>
+                    <div className='text-center mt-3'>
+                      {loading ? (
+                        <Spinner animation='border' variant='primary' />
+                      ) : (
+                        <Button variant='primary' type='submit'>
+                          Submit
+                        </Button>
+                      )}
                     </div>
                   </Form>
                 );
