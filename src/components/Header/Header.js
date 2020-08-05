@@ -27,9 +27,14 @@ const Header = () => {
   if (token && role) {
     if (role === 'Admin') {
       linkItems = (
-        <Nav.Link as={Link} to='/admin/dashboard'>
-          Dashboard
-        </Nav.Link>
+        <>
+          <Nav.Link as={Link} to='/admin/dashboard'>
+            Dashboard
+          </Nav.Link>
+          <Nav.Link as={Link} to='/admin/dashboard' className='ml-auto'>
+            Dashboard
+          </Nav.Link>
+        </>
       );
     } else {
       linkItems = (

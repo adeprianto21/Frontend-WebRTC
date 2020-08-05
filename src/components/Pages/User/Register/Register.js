@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as actions from '../../../../redux/actions';
+import isLoggedIn from '../../../../hooks/useIsLoggedIn';
 
 const initialValues = {
   name: '',
@@ -21,6 +22,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const Register = () => {
+  isLoggedIn();
+
   const dispatch = useDispatch();
 
   const error = useSelector((state) => state.auth.error);

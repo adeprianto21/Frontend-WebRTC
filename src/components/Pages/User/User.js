@@ -3,8 +3,11 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 import Login from './Login/Login';
 import Register from './Register/Register';
+import isLoggedIn from '../../../hooks/useIsLoggedIn';
 
 const User = () => {
+  isLoggedIn();
+
   const route = useRouteMatch();
 
   return (
