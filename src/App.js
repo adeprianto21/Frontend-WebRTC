@@ -3,24 +3,20 @@ import { Switch, Route } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import HomePage from './components/Pages/Home/Home';
-import LoginPage from './components/Pages/Login/Login';
-import RegisterPage from './components/Pages/Register/Register';
-import DashboardPage from './components/Pages/Dashboard/Dashboard';
 import NotFoundPage from './components/Pages/NotFound/NotFound';
+import User from './components/Pages/User/User';
+import Admin from './components/Pages/Admin/Admin';
 
 function App() {
   return (
     <div>
       <Header />
       <Switch>
-        <Route path='/user/register'>
-          <RegisterPage />
+        <Route path='/admin'>
+          <Admin />
         </Route>
-        <Route path='/user/login'>
-          <LoginPage />
-        </Route>
-        <Route path='/user/dashboard'>
-          <DashboardPage />
+        <Route path='/user'>
+          <User />
         </Route>
         <Route path='/' exact>
           <HomePage />
