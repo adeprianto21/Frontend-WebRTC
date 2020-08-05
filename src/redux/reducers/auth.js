@@ -5,6 +5,7 @@ import * as actionTypes from '../actions/actionsTypes';
 const initialState = {
   user: null,
   token: null,
+  role: null,
   error: null,
   loading: false,
 };
@@ -15,6 +16,7 @@ const authReducer = (state = initialState, action) => {
       return {
         user: null,
         token: null,
+        role: null,
         error: null,
         loading: true,
       };
@@ -23,6 +25,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         user: null,
         token: null,
+        role: null,
         error: action.error,
       };
     case actionTypes.AUTH_SUCCESS:
@@ -30,6 +33,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         user: action.user,
         token: action.token,
+        role: action.role,
         error: null,
       };
     case actionTypes.AUTH_DONE:
@@ -41,6 +45,7 @@ const authReducer = (state = initialState, action) => {
       return {
         user: null,
         token: null,
+        role: null,
         error: null,
         loading: false,
       };

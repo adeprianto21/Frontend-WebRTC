@@ -1,1 +1,1 @@
-export { auth, clearError } from './auth';
+export { auth, register, clearError } from './auth';

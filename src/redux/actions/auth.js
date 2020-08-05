@@ -14,11 +14,12 @@ const authFail = (err) => {
   };
 };
 
-const authSuccess = (user, token) => {
+const authSuccess = (user, token, role) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     user: user,
     token: token,
+    role: role,
   };
 };
 
@@ -34,6 +35,29 @@ export const clearError = () => {
   };
 };
 
+export const register = (name, username, email, password) => {
+  return (dispatch) => {
+    dispatch(authStart());
+    axios
+      .post('/user/register', {
+        name: name,
+        username: username,
+        email: email,
+        password: password,
+      })
+      .then((res) => {
+        dispatch(authSuccess(res.data.user, res.data.token, res.data.role));
+        dispatch(authDone());
+      })
+      .catch((err) => {
+        if (err.response) {
+          dispatch(authFail(err.response.data.msg));
+        }
+        dispatch(authDone());
+      });
+  };
+};
+
 export const auth = (identifier, password) => {
   return (dispatch) => {
     dispatch(authStart());
@@ -43,15 +67,12 @@ export const auth = (identifier, password) => {
         password: password,
       })
       .then((res) => {
-        dispatch(authSuccess(res.data.user, res.data.token));
+        dispatch(authSuccess(res.data.user, res.data.token, res.data.role));
         dispatch(authDone());
       })
       .catch((err) => {
         if (err.response) {
           dispatch(authFail(err.response.data.msg));
-        }
-        if (err.request) {
-          dispatch(authFail('Server Sedang Bermasalah'));
         }
         dispatch(authDone());
       });

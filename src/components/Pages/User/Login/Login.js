@@ -97,7 +97,7 @@ const Login = () => {
                         <Spinner animation='border' variant='primary' />
                       ) : (
                         <Button variant='primary' type='submit'>
-                          Submit
+                          Login
                         </Button>
                       )}
                     </div>
