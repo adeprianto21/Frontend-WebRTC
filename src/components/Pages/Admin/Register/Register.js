@@ -28,7 +28,7 @@ const Register = () => {
         <Card.Body>
           <Card.Title className='text-center'>Admin Register</Card.Title>
           <Card.Subtitle className='mb-2 text-muted text-center'>
-            Apo-tech
+            Apo-Tech
           </Card.Subtitle>
           <div className='mt-5'>
             <Formik

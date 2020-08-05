@@ -18,6 +18,9 @@ const Header = () => {
             <Nav.Link as={Link} to='/admin/login'>
               Admin Login
             </Nav.Link>
+            <Nav.Link as={Link} to='/admin/register'>
+              Admin Register
+            </Nav.Link>
             <Nav.Link as={Link} to='/user/login'>
               User Login
             </Nav.Link>

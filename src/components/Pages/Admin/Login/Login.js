@@ -24,7 +24,7 @@ const Login = () => {
         <Card.Body>
           <Card.Title className='text-center'>Admin Login</Card.Title>
           <Card.Subtitle className='mb-2 text-muted text-center'>
-            Apo-tech
+            Apo-Tech
           </Card.Subtitle>
           <div className='mt-5'>
             <Formik
