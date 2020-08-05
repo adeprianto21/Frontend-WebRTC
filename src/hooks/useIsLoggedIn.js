@@ -15,8 +15,6 @@ const useIsLoggedIn = () => {
       } else {
         history.replace('/user/dashboard');
       }
-    } else {
-      history.replace('/');
     }
   }, [history, role, token]);
 };

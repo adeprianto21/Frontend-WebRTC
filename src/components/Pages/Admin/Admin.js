@@ -1,14 +1,25 @@
-import React from 'react';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import Login from './Login/Login';
 import Register from './Register/Register';
-import isLoggedIn from '../../../hooks/useIsLoggedIn';
+import Dashboard from './Dashboard/Dashboard';
 
 const Admin = () => {
-  isLoggedIn();
-
+  const history = useHistory();
   const route = useRouteMatch();
+  const role = useSelector((state) => state.auth.role);
+
+  useEffect(() => {
+    if (role === 'User') {
+      history.replace('/user/dashboard');
+    } else if (!role) {
+      history.replace('/admin/login');
+    } else if (history.location.pathname === '/admin' && role === 'Admin') {
+      history.replace('/admin/dashboard');
+    }
+  });
 
   return (
     <Switch>
@@ -19,7 +30,7 @@ const Admin = () => {
         <Register />
       </Route>
       <Route path={`${route.url}/dashboard`}>
-        <div>Dashboard Admin</div>
+        <Dashboard />
       </Route>
     </Switch>
   );
