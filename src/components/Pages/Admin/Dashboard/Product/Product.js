@@ -37,7 +37,7 @@ const Product = () => {
   }, []);
 
   return categories ? (
-    <Container className='mt-3'>
+    <Container className='mt-3 mb-5'>
       <Card>
         <Card.Body>
           <Card.Title className='text-center'>Tambah Product</Card.Title>
@@ -148,7 +148,7 @@ const Product = () => {
                     </Form.Group>
 
                     <Form.Group controlId='image'>
-                      <Form.Label>Stock Barang</Form.Label>
+                      <Form.Label>Gambar Barang</Form.Label>
                       <Form.Control
                         name='image'
                         type='file'
