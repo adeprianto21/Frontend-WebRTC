@@ -1,6 +1,7 @@
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
+import Header from './components/Header/Header';
 import HomePage from './components/Pages/Home/Home';
 import LoginPage from './components/Pages/Login/Login';
 import RegisterPage from './components/Pages/Register/Register';
@@ -10,6 +11,7 @@ import NotFoundPage from './components/Pages/NotFound/NotFound';
 function App() {
   return (
     <div>
+      <Header />
       <Switch>
         <Route path='/user/register'>
           <RegisterPage />
