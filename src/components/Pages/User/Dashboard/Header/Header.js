@@ -25,7 +25,7 @@ const Header = () => {
         variant='primary'
         onClick={() => {
           dispatch(actions.authLogout());
-          history.replace('/admin/login');
+          history.replace('/user/login');
         }}
       >
         Log Out

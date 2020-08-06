@@ -11,7 +11,7 @@ const Sidebar = () => {
         <h3 className={style['sidebar-header']}>Apo-Tech</h3>
       </Link>
       <hr className={style['sidebar-divider']} />
-      <Link>
+      <Link to='#!'>
         <span className={style['sidebar-menu']}>Checkout</span>
       </Link>
     </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Card, Form, Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from '../../../../../axios/axios';
@@ -22,12 +23,29 @@ const validationSchema = Yup.object().shape({
   categoryId: Yup.string().required(),
 });
 
-const submitHandler = (values) => {
-  console.log(values);
-};
-
 const Product = () => {
   const [categories, setCategories] = useState(null);
+
+  const token = useSelector((state) => state.auth.token);
+
+  const submitHandler = (values) => {
+    console.log(values);
+
+    const formData = new FormData();
+    formData.append('name', values.name);
+    formData.append('description', values.description);
+    formData.append('price', values.price);
+    formData.append('stock', values.stock);
+    formData.append('image', values.image);
+    formData.append('categoryId', values.categoryId);
+
+    axios
+      .post('/product/createProduct', formData, {
+        headers: { Authorization: token },
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     axios
