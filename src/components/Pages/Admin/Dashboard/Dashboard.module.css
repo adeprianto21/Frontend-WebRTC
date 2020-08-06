@@ -4,3 +4,23 @@
   background-color: #f8f9fc;
   padding: 100px 1rem 1rem 270px;
 }
+
+.video-container {
+  width: 100%;
+  position: relative;
+}
+
+.other-video {
+  width: 100%;
+  border: 1px solid purple;
+  border-radius: 0.25rem;
+}
+
+.my-video {
+  position: absolute;
+  bottom: 20px;
+  right: 15px;
+  width: 250px;
+  border: 1px solid red;
+  border-radius: 0.25rem;
+}
