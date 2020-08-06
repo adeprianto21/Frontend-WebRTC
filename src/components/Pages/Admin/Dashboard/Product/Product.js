@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Card, Form, Button } from 'react-bootstrap';
+import { Container, Card, Form, Button, Spinner } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from '../../../../../axios/axios';
@@ -17,16 +18,26 @@ const initialValues = {
 const validationSchema = Yup.object().shape({
   name: Yup.string().required(),
   description: Yup.string().required(),
-  price: Yup.string().required(),
-  stock: Yup.string().required(),
+  price: Yup.number().required(),
+  stock: Yup.number().required(),
   image: Yup.mixed().required(),
   categoryId: Yup.string().required(),
 });
 
 const Product = () => {
+  const history = useHistory();
+
   const [categories, setCategories] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const token = useSelector((state) => state.auth.token);
+
+  useEffect(() => {
+    axios
+      .get('/product/categories')
+      .then((res) => setCategories(res.data.categories))
+      .catch((err) => console.log(err));
+  }, []);
 
   const submitHandler = (values) => {
     console.log(values);
@@ -39,20 +50,19 @@ const Product = () => {
     formData.append('image', values.image);
     formData.append('categoryId', values.categoryId);
 
+    setLoading(true);
     axios
       .post('/product/createProduct', formData, {
         headers: { Authorization: token },
       })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        setLoading(false);
+        history.replace('/admin/dashboard/list-product');
+      })
+      .catch((err) => {
+        setLoading(false);
+      });
   };
-
-  useEffect(() => {
-    axios
-      .get('/product/categories')
-      .then((res) => setCategories(res.data.categories))
-      .catch((err) => console.log(err));
-  }, []);
 
   return categories ? (
     <Container className='mt-3 mb-5'>
@@ -111,7 +121,7 @@ const Product = () => {
                     <Form.Group controlId='price'>
                       <Form.Label>Harga Barang</Form.Label>
                       <Form.Control
-                        type='text'
+                        type='number'
                         placeholder='Enter Product Price'
                         name='price'
                         value={formik.values.price}
@@ -127,7 +137,7 @@ const Product = () => {
                     <Form.Group controlId='stock'>
                       <Form.Label>Stock Barang</Form.Label>
                       <Form.Control
-                        type='text'
+                        type='number'
                         placeholder='Enter Product Stock'
                         name='stock'
                         value={formik.values.stock}
@@ -187,9 +197,13 @@ const Product = () => {
                     </Form.Group>
 
                     <div className='text-center mt-3'>
-                      <Button variant='primary' type='submit'>
-                        Submit
-                      </Button>
+                      {loading ? (
+                        <Spinner animation='border' variant='primary' />
+                      ) : (
+                        <Button variant='primary' type='submit'>
+                          Login
+                        </Button>
+                      )}
                     </div>
                   </Form>
                 );

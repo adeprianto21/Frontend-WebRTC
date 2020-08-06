@@ -12,8 +12,14 @@ const Sidebar = () => {
         <h3 className={style['sidebar-header']}>Apo-Tech</h3>
       </Link>
       <hr className={style['sidebar-divider']} />
+      <Link to={`${route.url}`}>
+        <span className={style['sidebar-menu']}>Dashboard</span>
+      </Link>
       <Link to={`${route.url}/add-product`}>
         <span className={style['sidebar-menu']}>Tambah Product</span>
+      </Link>
+      <Link to={`${route.url}/list-product`}>
+        <span className={style['sidebar-menu']}>List Product</span>
       </Link>
     </div>
   );

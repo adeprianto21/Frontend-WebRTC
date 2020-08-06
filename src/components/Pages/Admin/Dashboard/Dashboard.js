@@ -9,6 +9,7 @@ import style from './Dashboard.module.css';
 import Sidebar from './Sidebar/Sidebar';
 import Header from './Header/Header';
 import Product from './Product/Product';
+import ListProduct from './ListProduct/ListProduct';
 
 const Dashboard = () => {
   const socket = useRef(null);
@@ -181,8 +182,6 @@ const Dashboard = () => {
     );
   }
 
-  console.log(receivingCall);
-
   return (
     <div className={style.dashboard}>
       <Header />
@@ -190,6 +189,9 @@ const Dashboard = () => {
       <Switch>
         <Route path='/admin/dashboard/add-product'>
           <Product />
+        </Route>
+        <Route path='/admin/dashboard/list-product'>
+          <ListProduct />
         </Route>
         <Route path='/admin/dashboard'>
           <div className={style['video-container']}>
